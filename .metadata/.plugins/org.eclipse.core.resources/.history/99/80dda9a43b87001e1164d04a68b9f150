@@ -1,0 +1,44 @@
+package guis;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+
+public class Principal {
+
+	private JFrame frmTitulo;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Principal window = new Principal();
+					window.frmTitulo.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public Principal() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmTitulo = new JFrame();
+		frmTitulo.setTitle("Titulo");
+		frmTitulo.setBounds(100, 100, 900, 650);
+		frmTitulo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+}
