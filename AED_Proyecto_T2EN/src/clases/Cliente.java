@@ -1,14 +1,11 @@
 package clases;
 
-import java.util.ArrayList;
-
 public class Cliente {
     private int codigoCliente = 1001;
     private String nombres;
     private String apellidos;
     private String telefono;
     private String dni;
-    private ArrayList<Cliente> aLC = new ArrayList<Cliente>();
     //Constructor por defecto
 
     public Cliente(int codigoCliente, String nombres, String apellidos, String telefono, String dni) {
@@ -63,8 +60,6 @@ public class Cliente {
 
     //Metodos
 
-    public void Ingreso(Cliente x) {
-        aLC.add(x);
-    }
+
 }
 
