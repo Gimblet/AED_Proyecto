@@ -1,41 +1,364 @@
 package guis;
 
+import arreglos.ArregloClientes;
+import clases.Cliente;
+
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.*;
+import javax.swing.border.EtchedBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
-public class GuiCliente extends JFrame {
+public class GuiCliente extends JDialog implements ActionListener {
+    private static final long serialVersionUID = 1L;
+    private JLabel lblCodigo;
+    private JTextField txtCodigo;
+    private JLabel lblNombre;
+    private JTextField txtNombre;
+    private JLabel lblApellidos;
+    private JTextField txtApellidos;
+    private JLabel lblDni;
+    private JTextField txtDNI;
+    private JScrollPane scpScroll;
+    private JButton btnConsultar;
+    private JButton btnModificar;
+    private JButton btnEliminar;
+    private JButton btnCerrar;
+    private JPanel pnlFichas;
+    private JPanel pnlBotones;
+    private JTable tblClientes;
+    private JLabel lblTelefono;
+    private JTextField txtTelefono;
+    private JButton btnIngresar;
+    private JButton btnNuevo;
+    private JButton btnCancelar;
+    private DefaultTableModel modelo;
 
-	private JPanel contentPane;
+    ArregloClientes aC = new ArregloClientes();
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GuiCliente frame = new GuiCliente();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    GuiCliente dialog = new GuiCliente();
+                    dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                    dialog.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
-	/**
-	 * Create the frame.
-	 */
-	public GuiCliente() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+    /**
+     * Create the dialog.
+     */
+    public GuiCliente() {
+        setModal(true);
+        setResizable(false);
+        setTitle("Mantenimiento de Clientes");
+        setBounds(100, 100, 686, 436);
+        getContentPane().setLayout(null);
 
-		setContentPane(contentPane);
-	}
+        pnlFichas = new JPanel();
+        pnlFichas.setBounds(10, 11, 397, 183);
+        getContentPane().add(pnlFichas);
+        pnlFichas.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+        pnlFichas.setLayout(null);
+
+        lblCodigo = new JLabel("Código");
+        lblCodigo.setBounds(10, 11, 69, 14);
+        pnlFichas.add(lblCodigo);
+
+        txtCodigo = new JTextField();
+        txtCodigo.setBounds(89, 8, 121, 20);
+        pnlFichas.add(txtCodigo);
+        txtCodigo.setColumns(10);
+
+        lblNombre = new JLabel("Nombres");
+        lblNombre.setBounds(10, 36, 69, 14);
+        pnlFichas.add(lblNombre);
+
+        txtNombre = new JTextField();
+        txtNombre.setBounds(89, 33, 235, 20);
+        pnlFichas.add(txtNombre);
+        txtNombre.setColumns(10);
+
+        lblApellidos = new JLabel("Apellidos");
+        lblApellidos.setBounds(10, 61, 69, 14);
+        pnlFichas.add(lblApellidos);
+
+        txtApellidos = new JTextField();
+        txtApellidos.setBounds(89, 58, 121, 20);
+        pnlFichas.add(txtApellidos);
+        txtApellidos.setColumns(10);
+
+        lblDni = new JLabel("DNI");
+        lblDni.setBounds(10, 111, 69, 14);
+        pnlFichas.add(lblDni);
+
+        txtDNI = new JTextField();
+        txtDNI.setBounds(89, 108, 121, 20);
+        pnlFichas.add(txtDNI);
+        txtDNI.setColumns(10);
+
+        btnConsultar = new JButton("Buscar");
+        btnConsultar.addActionListener(this);
+        btnConsultar.setBounds(223, 7, 101, 23);
+        pnlFichas.add(btnConsultar);
+
+        lblTelefono = new JLabel("Teléfono");
+        lblTelefono.setBounds(10, 86, 46, 14);
+        pnlFichas.add(lblTelefono);
+
+        txtTelefono = new JTextField();
+        txtTelefono.setBounds(89, 83, 121, 20);
+        pnlFichas.add(txtTelefono);
+        txtTelefono.setColumns(10);
+
+        pnlBotones = new JPanel();
+        pnlBotones.setBounds(431, 11, 229, 183);
+        getContentPane().add(pnlBotones);
+        pnlBotones.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+        pnlBotones.setLayout(null);
+
+        btnModificar = new JButton("Modificar");
+        btnModificar.addActionListener(this);
+        btnModificar.setBounds(122, 11, 97, 23);
+        pnlBotones.add(btnModificar);
+
+        btnEliminar = new JButton("Eliminar");
+        btnEliminar.addActionListener(this);
+        btnEliminar.setBounds(10, 45, 97, 23);
+        pnlBotones.add(btnEliminar);
+
+        btnCerrar = new JButton("Cerrar");
+        btnCerrar.addActionListener(this);
+        btnCerrar.setBounds(122, 79, 97, 23);
+        pnlBotones.add(btnCerrar);
+
+        btnNuevo = new JButton("Nuevo");
+        btnNuevo.addActionListener(this);
+        btnNuevo.setBounds(10, 11, 97, 23);
+        pnlBotones.add(btnNuevo);
+
+        btnIngresar = new JButton("Ingresar");
+        btnIngresar.addActionListener(this);
+        btnIngresar.setBounds(122, 45, 97, 23);
+        pnlBotones.add(btnIngresar);
+
+        btnCancelar = new JButton("Cancelar");
+        btnCancelar.addActionListener(this);
+        btnCancelar.setBounds(10, 79, 97, 23);
+        pnlBotones.add(btnCancelar);
+
+        scpScroll = new JScrollPane();
+        scpScroll.setBounds(10, 205, 650, 181);
+        getContentPane().add(scpScroll);
+
+        tblClientes = new JTable();
+        tblClientes.setShowGrid(false);
+        tblClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tblClientes.setFillsViewportHeight(true);
+        scpScroll.setViewportView(tblClientes);
+
+        modelo = new ModeloTabla();
+        modelo.addColumn("Código");
+        modelo.addColumn("Nombres");
+        modelo.addColumn("Apellidos");
+        modelo.addColumn("Teléfono");
+        modelo.addColumn("DNI");
+        tblClientes.setModel(modelo);
+
+        fijarAnchoColumnas();
+        listar();
+        inicializarVentana();
+    }
+
+    public void actionPerformed(ActionEvent arg0) {
+        if (arg0.getSource() == btnCancelar) {
+            actionPerformedBtnCancelar(arg0);
+        }
+        if (arg0.getSource() == btnIngresar) {
+            actionPerformedBtnIngresar(arg0);
+        }
+        if (arg0.getSource() == btnNuevo) {
+            actionPerformedBtnNuevo(arg0);
+        }
+        if (arg0.getSource() == btnConsultar) {
+            actionPerformedBtnConsultar(arg0);
+        }
+        if (arg0.getSource() == btnCerrar) {
+            actionPerformedBtnCerrar(arg0);
+        }
+        if (arg0.getSource() == btnEliminar) {
+            actionPerformedBtnEliminar(arg0);
+        }
+        if (arg0.getSource() == btnModificar) {
+            actionPerformedBtnModificar(arg0);
+        }
+    }
+
+    protected void actionPerformedBtnNuevo(ActionEvent arg0) {
+        txtCodigo.setText("");
+        txtNombre.setText("");
+        txtApellidos.setText("");
+        txtTelefono.setText("");
+        txtDNI.setText("");
+
+        txtCodigo.setEnabled(false);
+        txtNombre.setEnabled(true);
+        txtApellidos.setEnabled(true);
+        txtTelefono.setEnabled(true);
+        txtDNI.setEnabled(true);
+
+        txtCodigo.setText(aC.generarCodigo() + "");
+
+        btnConsultar.setEnabled(false);
+        btnNuevo.setEnabled(false);
+        btnModificar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        btnIngresar.setEnabled(true);
+        btnCancelar.setEnabled(true);
+    }
+
+    //Metodos para los botones
+
+    protected void actionPerformedBtnIngresar(ActionEvent arg0) {
+        aC.adicionar(new Cliente(leerCodigo(), leerNombre(), leerApellidos(), leerTelefono(), leerDni()));
+        listar();
+        inicializarVentana();
+    }
+
+    protected void actionPerformedBtnModificar(ActionEvent e) {
+        Cliente c = aC.buscar(leerCodigo());
+        if (c != null) {
+            c.setCodigoCliente(leerCodigo());
+            c.setNombres(leerNombre());
+            c.setApellidos(leerApellidos());
+            c.setTelefono(leerTelefono());
+            c.setDni(leerDni());
+            listar();
+            inicializarVentana();
+        } else {
+            JOptionPane.showMessageDialog(this, "El codigo Ingresado no Existe");
+        }
+    }
+
+    protected void actionPerformedBtnConsultar(ActionEvent e) {
+        Cliente x = aC.buscar(leerCodigo());
+        if (x != null) {
+            txtCodigo.setText(x.getCodigoCliente() + "");
+            txtNombre.setText(x.getNombres());
+            txtApellidos.setText(x.getApellidos());
+            txtTelefono.setText(x.getTelefono());
+            txtDNI.setText(x.getDni());
+
+            txtCodigo.setEnabled(false);
+            txtNombre.setEnabled(true);
+            txtApellidos.setEnabled(true);
+            txtTelefono.setEnabled(true);
+            txtDNI.setEnabled(true);
+
+            btnConsultar.setEnabled(false);
+            btnNuevo.setEnabled(false);
+            btnModificar.setEnabled(true);
+            btnEliminar.setEnabled(true);
+            btnIngresar.setEnabled(false);
+            btnCancelar.setEnabled(true);
+        } else
+            JOptionPane.showMessageDialog(this, "El código ingresado no existe");
+    }
+
+    protected void actionPerformedBtnEliminar(ActionEvent e) {
+        Cliente x = aC.buscar(leerCodigo());
+        if (x != null) {
+            aC.eliminar(x);
+            listar();
+            inicializarVentana();
+        } else {
+            JOptionPane.showMessageDialog(this, "El codigo Ingresado no Existe");
+        }
+    }
+
+    //Metodos Adicionales / Complementarios
+
+    protected void actionPerformedBtnCerrar(ActionEvent e) {
+        dispose();
+    }
+
+    protected void actionPerformedBtnCancelar(ActionEvent arg0) {
+        inicializarVentana();
+    }
+
+    private void inicializarVentana() {
+        txtCodigo.setText("");
+        txtNombre.setText("");
+        txtApellidos.setText("");
+        txtTelefono.setText("");
+        txtDNI.setText("");
+
+        txtCodigo.setEnabled(true);
+        txtNombre.setEnabled(false);
+        txtApellidos.setEnabled(false);
+        txtTelefono.setEnabled(false);
+        txtDNI.setEnabled(false);
+
+        btnConsultar.setEnabled(true);
+        btnNuevo.setEnabled(true);
+        btnModificar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        btnIngresar.setEnabled(false);
+        btnCancelar.setEnabled(false);
+    }
+
+    private void listar() {
+        modelo.setRowCount(0);
+        for (int i = 0; i < aC.tamano(); i++) {
+            Cliente x = aC.obtener(i);
+            Object[] fila = {x.getCodigoCliente(), x.getNombres(), x.getApellidos(), x.getTelefono(), x.getDni()};
+            modelo.addRow(fila);
+        }
+    }
+
+    private int leerCodigo() {
+        return Integer.parseInt(txtCodigo.getText());
+    }
+
+    private String leerNombre() {
+        return txtNombre.getText();
+    }
+
+    private String leerApellidos() {
+        return txtApellidos.getText();
+    }
+
+    private String leerTelefono() {
+        return txtTelefono.getText();
+    }
+
+    private String leerDni() {
+        return txtDNI.getText();
+    }
+
+    void fijarAnchoColumnas() {
+        TableColumnModel tcm = tblClientes.getColumnModel();
+        tcm.getColumn(0).setPreferredWidth(60); // Codigo
+        tcm.getColumn(1).setPreferredWidth(150); // Nombre
+        tcm.getColumn(2).setPreferredWidth(70); // DNI
+        tcm.getColumn(3).setPreferredWidth(70); // Peso
+        tcm.getColumn(4).setPreferredWidth(70); // Estatura
+    }
 
 }

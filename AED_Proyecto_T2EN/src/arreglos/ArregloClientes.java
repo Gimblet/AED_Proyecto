@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class ArregloClientes {
     private ArrayList<Cliente> ArrayCliente;
 
-    ArregloClientes() {
+    public ArregloClientes() {
         ArrayCliente = new ArrayList<Cliente>();
         adicionar(new Cliente(1001, "Pedro", "Suyon", "94568434", "79238433"));
     }
