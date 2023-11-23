@@ -47,7 +47,7 @@ public class GuiProductos extends JDialog implements ActionListener {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    GuiVendores dialog = new GuiVendores();
+                    GuiProductos dialog = new GuiProductos();
                     dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
                     dialog.setVisible(true);
                 } catch (Exception e) {
