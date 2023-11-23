@@ -103,11 +103,6 @@ public class Principal extends JFrame implements ActionListener {
 		mnMantenimiento.add(mntmClientes);
 		
 		mntmProductos = new JMenuItem("Productos");
-		mntmProductos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				mntmProductosActionPerformed(e);
-			}
-		});
 		mnMantenimiento.add(mntmProductos);
 		
 		mnIngreso = new JMenu("Ventas");
@@ -136,9 +131,6 @@ public class Principal extends JFrame implements ActionListener {
 		else if(e.getSource() == mntmVendedores){
 			mntmVendedoresActionPerformed(e);
 		}
-		else if(e.getSource() == mntmProductos){
-			mntmProductosActionPerformed(e);
-		}
 	}
 
 	protected void mntmClientesActionPerformed(ActionEvent e) {
@@ -151,10 +143,5 @@ public class Principal extends JFrame implements ActionListener {
 		GuiVendores guiVen = new GuiVendores();
 		guiVen.setLocationRelativeTo(this);
 		guiVen.setVisible(true);
-	}
-	protected void mntmProductosActionPerformed(ActionEvent e) {
-		GuiProductos guiPro = new GuiProductos();
-		guiPro.setLocationRelativeTo(this);
-		guiPro.setVisible(true);
 	}
 }

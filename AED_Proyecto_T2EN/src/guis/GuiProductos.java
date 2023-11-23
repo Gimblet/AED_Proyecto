@@ -1,7 +1,7 @@
 package guis;
 
-import arreglos.ArregloVendedores;
-import clases.Vendedor;
+import arreglos.ArregloProductos;
+import clases.Producto;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -12,16 +12,13 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-public class GuiVendores extends JDialog implements ActionListener {
+public class GuiProductos extends JDialog implements ActionListener {
+
     private static final long serialVersionUID = 1L;
     private JLabel lblCodigo;
     private JTextField txtCodigo;
-    private JLabel lblNombre;
-    private JTextField txtNombre;
-    private JLabel lblApellidos;
-    private JTextField txtApellidos;
-    private JLabel lblDni;
-    private JTextField txtDNI;
+    private JLabel lblPrecio;
+    private JTextField txtPrecio;
     private JScrollPane scpScroll;
     private JButton btnConsultar;
     private JButton btnModificar;
@@ -30,16 +27,14 @@ public class GuiVendores extends JDialog implements ActionListener {
     private JPanel pnlFichas;
     private JPanel pnlBotones;
     private JTable tblClientes;
-    private JLabel lblTelefono;
-    private JTextField txtTelefono;
     private JButton btnIngresar;
     private JButton btnNuevo;
     private JButton btnCancelar;
     private DefaultTableModel modelo;
-    private JLabel lblCategoria;
-    private JTextField txtCategoria;
+    private JLabel lblDescripcion;
+    private JTextField txtDescripcion;
 
-    ArregloVendedores aV = new ArregloVendedores();
+    ArregloProductos aP = new ArregloProductos();
     /**
      * Launch the application.
      */
@@ -65,10 +60,10 @@ public class GuiVendores extends JDialog implements ActionListener {
     /**
      * Create the dialog.
      */
-    public GuiVendores() {
+    public GuiProductos() {
         setModal(true);
         setResizable(false);
-        setTitle("Mantenimiento de Clientes");
+        setTitle("Productos");
         setBounds(100, 100, 686, 436);
         getContentPane().setLayout(null);
 
@@ -87,57 +82,30 @@ public class GuiVendores extends JDialog implements ActionListener {
         pnlFichas.add(txtCodigo);
         txtCodigo.setColumns(10);
 
-        lblNombre = new JLabel("Nombres");
-        lblNombre.setBounds(10, 70, 69, 14);
-        pnlFichas.add(lblNombre);
+        lblPrecio = new JLabel("Precio");
+        lblPrecio.setBounds(10, 70, 69, 14);
+        pnlFichas.add(lblPrecio);
 
-        txtNombre = new JTextField();
-        txtNombre.setBounds(89, 67, 235, 20);
-        pnlFichas.add(txtNombre);
-        txtNombre.setColumns(10);
-
-        lblApellidos = new JLabel("Apellidos");
-        lblApellidos.setBounds(10, 98, 69, 14);
-        pnlFichas.add(lblApellidos);
-
-        txtApellidos = new JTextField();
-        txtApellidos.setBounds(89, 96, 121, 20);
-        pnlFichas.add(txtApellidos);
-        txtApellidos.setColumns(10);
-
-        lblDni = new JLabel("DNI");
-        lblDni.setBounds(10, 154, 69, 14);
-        pnlFichas.add(lblDni);
-
-        txtDNI = new JTextField();
-        txtDNI.setBounds(89, 154, 121, 20);
-        pnlFichas.add(txtDNI);
-        txtDNI.setColumns(10);
+        txtPrecio = new JTextField();
+        txtPrecio.setBounds(89, 67, 235, 20);
+        pnlFichas.add(txtPrecio);
+        txtPrecio.setColumns(10);
 
         btnConsultar = new JButton("Buscar");
         btnConsultar.addActionListener(this);
         btnConsultar.setBounds(223, 7, 101, 23);
         pnlFichas.add(btnConsultar);
 
-        lblTelefono = new JLabel("Teléfono");
-        lblTelefono.setBounds(10, 126, 46, 14);
-        pnlFichas.add(lblTelefono);
+        lblDescripcion = new JLabel("Descripción");
+        lblDescripcion.setBounds(10, 42, 69, 14);
+        pnlFichas.add(lblDescripcion);
 
-        txtTelefono = new JTextField();
-        txtTelefono.setBounds(89, 125, 121, 20);
-        pnlFichas.add(txtTelefono);
-        txtTelefono.setColumns(10);
-        
-        lblCategoria = new JLabel("Categoria");
-        lblCategoria.setBounds(10, 42, 69, 14);
-        pnlFichas.add(lblCategoria);
-        
-        txtCategoria = new JTextField();
-        txtCategoria.setText("");
-        txtCategoria.setEnabled(false);
-        txtCategoria.setColumns(10);
-        txtCategoria.setBounds(89, 38, 121, 20);
-        pnlFichas.add(txtCategoria);
+        txtDescripcion = new JTextField();
+        txtDescripcion.setText("");
+        txtDescripcion.setEnabled(false);
+        txtDescripcion.setColumns(10);
+        txtDescripcion.setBounds(89, 38, 121, 20);
+        pnlFichas.add(txtDescripcion);
 
         pnlBotones = new JPanel();
         pnlBotones.setBounds(431, 11, 229, 183);
@@ -187,11 +155,8 @@ public class GuiVendores extends JDialog implements ActionListener {
 
         modelo = new ModeloTabla();
         modelo.addColumn("Código");
-        modelo.addColumn("categoria");
-        modelo.addColumn("Nombres");
-        modelo.addColumn("Apellidos");
-        modelo.addColumn("Teléfono");
-        modelo.addColumn("DNI");
+        modelo.addColumn("Descripcion");
+        modelo.addColumn("Precio");
         tblClientes.setModel(modelo);
 
         fijarAnchoColumnas();
@@ -225,18 +190,14 @@ public class GuiVendores extends JDialog implements ActionListener {
 
     protected void actionPerformedBtnNuevo(ActionEvent arg0) {
         txtCodigo.setText("");
-        txtNombre.setText("");
-        txtApellidos.setText("");
-        txtTelefono.setText("");
-        txtDNI.setText("");
+        txtDescripcion.setText("");
+        txtPrecio.setText("");
 
         txtCodigo.setEnabled(false);
-        txtNombre.setEnabled(true);
-        txtApellidos.setEnabled(true);
-        txtTelefono.setEnabled(true);
-        txtDNI.setEnabled(true);
+        txtPrecio.setEnabled(true);
+        txtDescripcion.setEnabled(true);
 
-        txtCodigo.setText(aV.generarCodigo() + "");
+        txtCodigo.setText(aP.generarCodigo() + "");
 
         btnConsultar.setEnabled(false);
         btnNuevo.setEnabled(false);
@@ -249,20 +210,17 @@ public class GuiVendores extends JDialog implements ActionListener {
     //Metodos para los botones
 
     protected void actionPerformedBtnIngresar(ActionEvent arg0) {
-        aV.adicionar(new Vendedor(leerCodigo(), leerCategoria(), leerNombre(), leerApellidos(), leerTelefono(), leerDni()));
+        aP.adicionar(new Producto(leerCodigo(), leerDescripcion(), leerPrecio()));
         listar();
         inicializarVentana();
     }
 
     protected void actionPerformedBtnModificar(ActionEvent e) {
-        Vendedor c = aV.buscar(leerCodigo());
+        Producto c = aP.buscar(leerCodigo());
         if (c != null) {
-            c.setCodigoVendedor(leerCodigo());
-            c.setCategoria(leerCategoria());
-            c.setNombres(leerNombre());
-            c.setApellidos(leerApellidos());
-            c.setTelefono(leerTelefono());
-            c.setDni(leerDni());
+            c.setCodigoProducto(leerCodigo());
+            c.setDescripcion(leerDescripcion());
+            c.setPrecio(leerPrecio());
             listar();
             inicializarVentana();
         } else {
@@ -271,21 +229,15 @@ public class GuiVendores extends JDialog implements ActionListener {
     }
 
     protected void actionPerformedBtnConsultar(ActionEvent e) {
-        Vendedor x = aV.buscar(leerCodigo());
+        Producto x = aP.buscar(leerCodigo());
         if (x != null) {
-            txtCodigo.setText(x.getCodigoVendedor() + "");
-            txtCategoria.setText(x.getCategoria() + "");
-            txtNombre.setText(x.getNombres());
-            txtApellidos.setText(x.getApellidos());
-            txtTelefono.setText(x.getTelefono());
-            txtDNI.setText(x.getDni());
+            txtCodigo.setText(x.getCodigoProducto() + "");
+            txtDescripcion.setText(x.getDescripcion());
+            txtPrecio.setText(x.getPrecio() + "");
 
             txtCodigo.setEnabled(false);
-            txtCategoria.setEnabled(true);
-            txtNombre.setEnabled(true);
-            txtApellidos.setEnabled(true);
-            txtTelefono.setEnabled(true);
-            txtDNI.setEnabled(true);
+            txtDescripcion.setEnabled(true);
+            txtPrecio.setEnabled(true);
 
             btnConsultar.setEnabled(false);
             btnNuevo.setEnabled(false);
@@ -298,9 +250,9 @@ public class GuiVendores extends JDialog implements ActionListener {
     }
 
     protected void actionPerformedBtnEliminar(ActionEvent e) {
-        Vendedor x = aV.buscar(leerCodigo());
+        Producto x = aP.buscar(leerCodigo());
         if (x != null) {
-            aV.eliminar(x);
+            aP.eliminar(x);
             listar();
             inicializarVentana();
         } else {
@@ -320,18 +272,12 @@ public class GuiVendores extends JDialog implements ActionListener {
 
     private void inicializarVentana() {
         txtCodigo.setText("");
-        txtCategoria.setText("");
-        txtNombre.setText("");
-        txtApellidos.setText("");
-        txtTelefono.setText("");
-        txtDNI.setText("");
+        txtDescripcion.setText("");
+        txtPrecio.setText("");
 
         txtCodigo.setEnabled(true);
-        txtCategoria.setEnabled(false);
-        txtNombre.setEnabled(false);
-        txtApellidos.setEnabled(false);
-        txtTelefono.setEnabled(false);
-        txtDNI.setEnabled(false);
+        txtDescripcion.setEnabled(false);
+        txtPrecio.setEnabled(false);
 
         btnConsultar.setEnabled(true);
         btnNuevo.setEnabled(true);
@@ -343,9 +289,9 @@ public class GuiVendores extends JDialog implements ActionListener {
 
     private void listar() {
         modelo.setRowCount(0);
-        for (int i = 0; i < aV.tamano(); i++) {
-            Vendedor x = aV.obtener(i);
-            Object[] fila = {x.getCodigoVendedor(), x.getCategoria(), x.getNombres(), x.getApellidos(), x.getTelefono(), x.getDni()};
+        for (int i = 0; i < aP.tamano(); i++) {
+            Producto x = aP.obtener(i);
+            Object[] fila = {x.getCodigoProducto(), x.getDescripcion(), x.getPrecio()};
             modelo.addRow(fila);
         }
     }
@@ -354,33 +300,18 @@ public class GuiVendores extends JDialog implements ActionListener {
         return Integer.parseInt(txtCodigo.getText());
     }
 
-    private int leerCategoria(){
-        return Integer.parseInt(txtCategoria.getText());
+    private String leerDescripcion(){
+        return txtDescripcion.getText();
     }
 
-    private String leerNombre() {
-        return txtNombre.getText();
-    }
-
-    private String leerApellidos() {
-        return txtApellidos.getText();
-    }
-
-    private String leerTelefono() {
-        return txtTelefono.getText();
-    }
-
-    private String leerDni() {
-        return txtDNI.getText();
+    private Double leerPrecio() {
+        return Double.parseDouble(txtPrecio.getText());
     }
 
     void fijarAnchoColumnas() {
         TableColumnModel tcm = tblClientes.getColumnModel();
         tcm.getColumn(0).setPreferredWidth(60); // Codigo
-        tcm.getColumn(1).setPreferredWidth(50); // Categoria
-        tcm.getColumn(2).setPreferredWidth(150); // Nombres
-        tcm.getColumn(3).setPreferredWidth(70); // Apellidos
-        tcm.getColumn(4).setPreferredWidth(70); // Telefono
-        tcm.getColumn(5).setPreferredWidth(70); // DNI
+        tcm.getColumn(1).setPreferredWidth(50); // Descripcion
+        tcm.getColumn(2).setPreferredWidth(60); // Precio
     }
 }

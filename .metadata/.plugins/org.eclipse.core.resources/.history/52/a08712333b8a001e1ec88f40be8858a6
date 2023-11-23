@@ -136,8 +136,8 @@ public class Principal extends JFrame implements ActionListener {
 		else if(e.getSource() == mntmVendedores){
 			mntmVendedoresActionPerformed(e);
 		}
-		else if(e.getSource() == mntmProductos){
-			mntmProductosActionPerformed(e);
+		else if(e.getSource() == mntmVendedores){
+			mntmVendedoresActionPerformed(e);
 		}
 	}
 
