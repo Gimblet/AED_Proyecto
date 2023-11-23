@@ -87,6 +87,11 @@ public class Principal extends JFrame implements ActionListener {
 		menuBar.add(mnMantenimiento);
 		
 		mntmVendedores = new JMenuItem("Vendedores");
+		mntmVendedores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mntmVendedoresActionPerformed(e);
+			}
+		});
 		mnMantenimiento.add(mntmVendedores);
 		
 		mntmClientes = new JMenuItem("Clientes");
@@ -123,11 +128,20 @@ public class Principal extends JFrame implements ActionListener {
 		if(e.getSource() == mntmClientes){
 			mntmClientesActionPerformed(e);
 		}
+		else if(e.getSource() == mntmVendedores){
+			mntmVendedoresActionPerformed(e);
+		}
 	}
 
 	protected void mntmClientesActionPerformed(ActionEvent e) {
 		GuiCliente guiCli = new GuiCliente();
 		guiCli.setLocationRelativeTo(this);
 		guiCli.setVisible(true);
+	}
+	
+	protected void mntmVendedoresActionPerformed(ActionEvent e) {
+		GuiVendores guiVen = new GuiVendores();
+		guiVen.setLocationRelativeTo(this);
+		guiVen.setVisible(true);
 	}
 }

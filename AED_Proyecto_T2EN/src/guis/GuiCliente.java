@@ -51,7 +51,7 @@ public class GuiCliente extends JDialog implements ActionListener {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    GuiCliente dialog = new GuiCliente();
+                    GuiVendores dialog = new GuiVendores();
                     dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
                     dialog.setVisible(true);
                 } catch (Exception e) {
