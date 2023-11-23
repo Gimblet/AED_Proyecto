@@ -12,7 +12,7 @@ import javax.swing.UIManager;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Principal extends JFrame implements ActionListener {
+public class Principal {
 
 	private JFrame frmMenuPrincipal;
 	private JScrollPane scrollPane;
@@ -20,9 +20,9 @@ public class Principal extends JFrame implements ActionListener {
 	private JMenu mnArchivo;
 	private JMenuItem mntmSalir;
 	private JMenu mnMantenimiento;
-	private JMenuItem mntmVendedores;
-	private JMenuItem mntmClientes;
-	private JMenuItem mntmProductos;
+	private JMenuItem mntmNewMenuItem;
+	private JMenuItem mntmVentas;
+	private JMenuItem mntmReportes;
 	private JMenu mnIngreso;
 	private JMenuItem mntmRealizarNuevaVenta;
 	private JMenu mnReportes;
@@ -86,19 +86,14 @@ public class Principal extends JFrame implements ActionListener {
 		mnMantenimiento = new JMenu("Mantenimiento");
 		menuBar.add(mnMantenimiento);
 		
-		mntmVendedores = new JMenuItem("Vendedores");
-		mnMantenimiento.add(mntmVendedores);
+		mntmNewMenuItem = new JMenuItem("Vendedores");
+		mnMantenimiento.add(mntmNewMenuItem);
 		
-		mntmClientes = new JMenuItem("Clientes");
-		mntmClientes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				mntmClientesActionPerformed(e);
-			}
-		});
-		mnMantenimiento.add(mntmClientes);
+		mntmVentas = new JMenuItem("Ventas");
+		mnMantenimiento.add(mntmVentas);
 		
-		mntmProductos = new JMenuItem("Productos");
-		mnMantenimiento.add(mntmProductos);
+		mntmReportes = new JMenuItem("Reportes");
+		mnMantenimiento.add(mntmReportes);
 		
 		mnIngreso = new JMenu("Ventas");
 		menuBar.add(mnIngreso);
@@ -119,13 +114,7 @@ public class Principal extends JFrame implements ActionListener {
 		System.out.println(0);
 	}
 
-	public void actionPerformed(ActionEvent e){
-		if(e.getSource() == mntmClientes){
-			mntmClientesActionPerformed(e);
-		}
-	}
-
-	protected void mntmClientesActionPerformed(ActionEvent e) {
+	protected void actionPerformedMntmClientes(ActionEvent e){
 		GuiCliente guiCli = new GuiCliente();
 		guiCli.setLocationRelativeTo(this);
 		guiCli.setVisible(true);
