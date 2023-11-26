@@ -136,9 +136,6 @@ public class Principal extends JFrame implements ActionListener {
 		else if(e.getSource() == mntmVendedores){
 			mntmVendedoresActionPerformed(e);
 		}
-		else if(e.getSource() == mntmProductos){
-			mntmProductosActionPerformed(e);
-		}
 	}
 
 	protected void mntmClientesActionPerformed(ActionEvent e) {
@@ -155,6 +152,6 @@ public class Principal extends JFrame implements ActionListener {
 	protected void mntmProductosActionPerformed(ActionEvent e) {
 		GuiProductos guiPro = new GuiProductos();
 		guiPro.setLocationRelativeTo(this);
-		guiPro.setVisible(true);
+		guiVen.setVisible(true);
 	}
 }
