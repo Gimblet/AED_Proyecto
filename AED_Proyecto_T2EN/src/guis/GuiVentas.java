@@ -2,6 +2,10 @@ package guis;
 
 import arreglos.ArregloVendedores;
 import clases.Vendedor;
+import clases.Cliente;
+import arreglos.ArregloClientes;
+import clases.Producto;
+import arreglos.ArregloProductos;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -9,27 +13,35 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
 import java.awt.Font;
+
+
+
 
 public class GuiVentas extends JDialog implements ActionListener {
     private static final long serialVersionUID = 1L;
-    private JLabel lblCodigo;
-    private JTextField txtCodigo;
-    private JLabel lblNombre;
+    private JLabel lblCodigoCliente;
+    private JTextField txtCodigoCliente;
+    private JLabel lblCodigoProducto;
     private JButton btnConsultar;
     private JPanel pnlFichas;
-    private DefaultTableModel modelo;
+ 
 
-    ArregloVendedores aV = new ArregloVendedores();
-    private JLabel lblCategoria;
-    private JTextField textField;
-    private JTextField textField_1;
-    private JTextField textField_2;
+    
+    private JLabel lblCodigoVendedor;
+    private JTextField txtCodigoVendedor;
+    private JTextField txtCodigoProducto;
+    private JTextField txtUnidadesVender;
     private JLabel lblUnidadesAVender;
     private JLabel lblNewLabel;
-
+    
+    ArregloClientes aC = new ArregloClientes();
+    ArregloVendedores aV = new ArregloVendedores();
+    ArregloProductos aP = new ArregloProductos();
+    private JPanel panel;
+    private JTextArea txtS;
+    
+    
     /**
      * Launch the application.
      */
@@ -51,65 +63,65 @@ public class GuiVentas extends JDialog implements ActionListener {
             }
         });
     }
-
+    
     /**
      * Create the dialog.
      */
     public GuiVentas() {
         setModal(true);
         setResizable(false);
-        setTitle("Mantenimiento de Clientes");
+        setTitle("Ventas de Clientes");
         setBounds(100, 100, 686, 436);
         getContentPane().setLayout(null);
 
         pnlFichas = new JPanel();
-        pnlFichas.setBounds(195, 36, 272, 311);
+        pnlFichas.setBounds(10, 36, 279, 311);
         getContentPane().add(pnlFichas);
         pnlFichas.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
         pnlFichas.setLayout(null);
 
-        lblCodigo = new JLabel("Código del cliente");
-        lblCodigo.setBounds(21, 108, 89, 14);
-        pnlFichas.add(lblCodigo);
+        lblCodigoCliente = new JLabel("Código del cliente");
+        lblCodigoCliente.setBounds(21, 108, 89, 14);
+        pnlFichas.add(lblCodigoCliente);
 
-        txtCodigo = new JTextField();
-        txtCodigo.setBounds(135, 105, 121, 20);
-        pnlFichas.add(txtCodigo);
-        txtCodigo.setColumns(10);
+        txtCodigoCliente = new JTextField();
+        txtCodigoCliente.setBounds(135, 105, 121, 20);
+        pnlFichas.add(txtCodigoCliente);
+        txtCodigoCliente.setColumns(10);
 
-        lblNombre = new JLabel("Código del producto");
-        lblNombre.setBounds(21, 161, 104, 14);
-        pnlFichas.add(lblNombre);
+        lblCodigoProducto = new JLabel("Código del producto");
+        lblCodigoProducto.setBounds(21, 161, 104, 14);
+        pnlFichas.add(lblCodigoProducto);
 
         btnConsultar = new JButton("Buscar");
         btnConsultar.addActionListener(this);
         btnConsultar.setBounds(82, 257, 101, 23);
         pnlFichas.add(btnConsultar);
         
-        lblCategoria = new JLabel("Código del vendedor");
-        lblCategoria.setBounds(21, 136, 104, 14);
-        pnlFichas.add(lblCategoria);
+        lblCodigoVendedor = new JLabel("Código del vendedor");
+        lblCodigoVendedor.setBounds(21, 136, 104, 14);
+        pnlFichas.add(lblCodigoVendedor);
         
-        textField = new JTextField();
-        textField.setText("");
-        textField.setEnabled(true);
-        textField.setColumns(10);
-        textField.setBounds(135, 133, 121, 20);
-        pnlFichas.add(textField);
+        txtCodigoVendedor = new JTextField();
+        txtCodigoVendedor.setText("");
+        txtCodigoVendedor.setEnabled(true);
+        txtCodigoVendedor.setColumns(10);
+        txtCodigoVendedor.setBounds(135, 133, 121, 20);
+        pnlFichas.add(txtCodigoVendedor);
         
-        textField_1 = new JTextField();
-        textField_1.setText("");
-        textField_1.setEnabled(true);
-        textField_1.setColumns(10);
-        textField_1.setBounds(135, 158, 121, 20);
-        pnlFichas.add(textField_1);
+        txtCodigoProducto = new JTextField();
+        txtCodigoProducto.setText("");
+        txtCodigoProducto.setEnabled(true);
+        txtCodigoProducto.setColumns(10);
+        txtCodigoProducto.setBounds(135, 158, 121, 20);
+        pnlFichas.add(txtCodigoProducto);
         
-        textField_2 = new JTextField();
-        textField_2.setText("");
-        textField_2.setEnabled(true);
-        textField_2.setColumns(10);
-        textField_2.setBounds(135, 186, 121, 20);
-        pnlFichas.add(textField_2);
+        txtUnidadesVender = new JTextField();
+        txtUnidadesVender.setText("");
+        txtUnidadesVender.setEnabled(true);
+        txtUnidadesVender.setColumns(10);
+        txtUnidadesVender.setBounds(135, 186, 121, 20);
+        pnlFichas.add(txtUnidadesVender);
         
         lblUnidadesAVender = new JLabel("Unidades a vender");
         lblUnidadesAVender.setBounds(21, 189, 104, 14);
@@ -117,20 +129,17 @@ public class GuiVentas extends JDialog implements ActionListener {
         
         lblNewLabel = new JLabel("VENTAS");
         lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 29));
-        lblNewLabel.setBounds(82, 11, 104, 66);
+        lblNewLabel.setBounds(82, 11, 133, 66);
         pnlFichas.add(lblNewLabel);
-
-        modelo = new ModeloTabla();
-        modelo.addColumn("Código");
-        modelo.addColumn("categoria");
-        modelo.addColumn("Nombres");
-        modelo.addColumn("Apellidos");
-        modelo.addColumn("Teléfono");
-        modelo.addColumn("DNI");
-
-        fijarAnchoColumnas();
-        listar();
-        inicializarVentana();
+        
+        panel = new JPanel();
+        panel.setBounds(311, 39, 337, 305);
+        getContentPane().add(panel);
+        panel.setLayout(null);
+        
+        txtS = new JTextArea();
+        txtS.setBounds(0, 0, 337, 305);
+        panel.add(txtS);
     }
 
     public void actionPerformed(ActionEvent arg0) {
@@ -138,81 +147,51 @@ public class GuiVentas extends JDialog implements ActionListener {
             actionPerformedBtnConsultar(arg0);
         }
     }
-
+    public int leerCodigoCliente() {
+    	return Integer.parseInt(txtCodigoCliente.getText());
+    }
+    public int leerCodigoVendedor() {
+    	return Integer.parseInt(txtCodigoVendedor.getText());
+    }
+    public int leerCodigoProducto() {
+    	return Integer.parseInt(txtCodigoProducto.getText());
+    }
+    public int LeerUnidadesAVender() {
+    	return Integer.parseInt(txtUnidadesVender.getText());
+    }
+    
     protected void actionPerformedBtnConsultar(ActionEvent e) {
-        Vendedor x = aV.buscar(leerCodigo());
-        if (x != null) {
-            txtCodigo.setText(x.getCodigoVendedor() + "");
-            txtCategoria.setText(x.getCategoria() + "");
-            txtNombre.setText(x.getNombres());
-            txtApellidos.setText(x.getApellidos());
-            txtTelefono.setText(x.getTelefono());
-            txtDNI.setText(x.getDni());
-
-            txtCodigo.setEnabled(false);
-            txtCategoria.setEnabled(true);
-            txtNombre.setEnabled(true);
-            txtApellidos.setEnabled(true);
-            txtTelefono.setEnabled(true);
-            txtDNI.setEnabled(true);
-
-            btnConsultar.setEnabled(false);
-            btnNuevo.setEnabled(false);
-            btnModificar.setEnabled(true);
-            btnEliminar.setEnabled(true);
-            btnIngresar.setEnabled(false);
-            btnCancelar.setEnabled(true);
-        } else
-            JOptionPane.showMessageDialog(this, "El código ingresado no existe");
+       Vendedor x = aV.buscar(leerCodigoVendedor());
+       Cliente c = aC.buscar(leerCodigoCliente());
+       Producto p = aP.buscar(leerCodigoProducto());
+       
+       if(x !=null && c !=null && p !=null) {
+    	  
+    	   imprimir("Codigo Cliente           :  " +c.getCodigoCliente());
+    	   imprimir("Codigo Vendedor          :  " +x.getCodigoVendedor());
+    	   imprimir("Codigo Producto          :  " +p.getCodigoProducto());
+    	   imprimir("Descripcion del producto :  " +p.getDescripcion());
+    	   imprimir("Precio unitario          :  " +p.getPrecio());
+    	   imprimir("Importe subTotal         :  " +subTotal(p));
+    	   imprimir("Importe del IGV          :  " +importeIGV(p));
+    	   imprimir("Importe total a pagar    :  " +totalPagar(p));
+    	   
+       }
+       else {
+    	   JOptionPane.showMessageDialog(this, "Codigo Invalido");
+       }
     }
-
-    private void inicializarVentana() {
-        txtCodigo.setText("");
-
-        txtCodigo.setEnabled(true);
-
-        btnConsultar.setEnabled(true);
+    
+    public double subTotal(Producto p) {
+ 	   return p.getPrecio()*LeerUnidadesAVender();
     }
-
-    private void listar() {
-        modelo.setRowCount(0);
-        for (int i = 0; i < aV.tamano(); i++) {
-            Vendedor x = aV.obtener(i);
-            Object[] fila = {x.getCodigoVendedor(), x.getCategoria(), x.getNombres(), x.getApellidos(), x.getTelefono(), x.getDni()};
-            modelo.addRow(fila);
-        }
+    public double importeIGV(Producto p) {
+    	return 0.18*subTotal(p);
     }
-
-    private int leerCodigo() {
-        return Integer.parseInt(txtCodigo.getText());
+    public double totalPagar(Producto p) {
+    	return importeIGV(p) + subTotal(p);
     }
-
-    private int leerCategoria(){
-        return Integer.parseInt(txtCategoria.getText());
-    }
-
-    private String leerNombre() {
-        return txtNombre.getText();
-    }
-
-    private String leerApellidos() {
-        return txtApellidos.getText();
-    }
-
-    private String leerTelefono() {
-        return txtTelefono.getText();
-    }
-
-    private String leerDni() {
-        return txtDNI.getText();
-    }
-
-    void fijarAnchoColumnas() {
-        tcm.getColumn(0).setPreferredWidth(60); // Codigo
-        tcm.getColumn(1).setPreferredWidth(50); // Categoria
-        tcm.getColumn(2).setPreferredWidth(150); // Nombres
-        tcm.getColumn(3).setPreferredWidth(70); // Apellidos
-        tcm.getColumn(4).setPreferredWidth(70); // Telefono
-        tcm.getColumn(5).setPreferredWidth(70); // DNI
-    }
+    void imprimir(String s) {
+		txtS.append(s + "\n");
+	}
 }
