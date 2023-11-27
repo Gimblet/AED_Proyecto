@@ -14,6 +14,10 @@ import java.awt.event.ActionEvent;
 
 public class Principal extends JFrame implements ActionListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JFrame frmMenuPrincipal;
 	private JScrollPane scrollPane;
 	private JMenuBar menuBar;
@@ -92,7 +96,6 @@ public class Principal extends JFrame implements ActionListener {
 				mntmVendedoresActionPerformed(e);
 			}
 		});
-		mnMantenimiento.add(mntmVendedores);
 		
 		mntmClientes = new JMenuItem("Clientes");
 		mntmClientes.addActionListener(new ActionListener() {
@@ -101,6 +104,7 @@ public class Principal extends JFrame implements ActionListener {
 			}
 		});
 		mnMantenimiento.add(mntmClientes);
+		mnMantenimiento.add(mntmVendedores);
 		
 		mntmProductos = new JMenuItem("Productos");
 		mntmProductos.addActionListener(new ActionListener() {
@@ -151,23 +155,23 @@ public class Principal extends JFrame implements ActionListener {
 
 	protected void mntmClientesActionPerformed(ActionEvent e) {
 		GuiCliente guiCli = new GuiCliente();
-		guiCli.setLocationRelativeTo(this);
+		guiCli.setLocationRelativeTo(frmMenuPrincipal);
 		guiCli.setVisible(true);
 	}
 	
 	protected void mntmVendedoresActionPerformed(ActionEvent e) {
 		GuiVendores guiVen = new GuiVendores();
-		guiVen.setLocationRelativeTo(this);
+		guiVen.setLocationRelativeTo(frmMenuPrincipal);
 		guiVen.setVisible(true);
 	}
 	protected void mntmProductosActionPerformed(ActionEvent e) {
 		GuiProductos guiPro = new GuiProductos();
-		guiPro.setLocationRelativeTo(this);
+		guiPro.setLocationRelativeTo(frmMenuPrincipal);
 		guiPro.setVisible(true);
 	}
 	protected void mntmRealizarNuevaVentaActionPerformed(ActionEvent e) {
 		GuiVentas guiVent = new GuiVentas();
-		guiVent.setLocationRelativeTo(this);
+		guiVent.setLocationRelativeTo(frmMenuPrincipal);
 		guiVent.setVisible(true);
 	}
 }

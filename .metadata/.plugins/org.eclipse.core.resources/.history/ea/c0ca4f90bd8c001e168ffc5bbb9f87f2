@@ -1,0 +1,198 @@
+package guis;
+
+import arreglos.ArregloVendedores;
+import clases.Vendedor;
+import clases.Cliente;
+import arreglos.ArregloClientes;
+import clases.Producto;
+import arreglos.ArregloProductos;
+
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+import javax.swing.border.EtchedBorder;
+import java.awt.Font;
+
+
+
+
+public class GuiVentas extends JDialog implements ActionListener {
+    private static final long serialVersionUID = 1L;
+    private JLabel lblCodigoCliente;
+    private JTextField txtCodigoCliente;
+    private JLabel lblCodigoProducto;
+    private JButton btnConsultar;
+    private JPanel pnlFichas;
+ 
+
+    
+    private JLabel lblCodigoVendedor;
+    private JTextField txtCodigoVendedor;
+    private JTextField txtCodigoProducto;
+    private JTextField txtUnidadesVender;
+    private JLabel lblUnidadesAVender;
+    private JLabel lblNewLabel;
+    
+    ArregloClientes aC = new ArregloClientes();
+    ArregloVendedores aV = new ArregloVendedores();
+    ArregloProductos aP = new ArregloProductos();
+    private JPanel panel;
+    private JTextArea txtS;
+    
+    
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    GuiVentas dialog = new GuiVentas();
+                    dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                    dialog.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+    
+    /**
+     * Create the dialog.
+     */
+    public GuiVentas() {
+        setModal(true);
+        setResizable(false);
+        setTitle("Ventas de Clientes");
+        setBounds(100, 100, 686, 436);
+        getContentPane().setLayout(null);
+
+        pnlFichas = new JPanel();
+        pnlFichas.setBounds(10, 11, 316, 375);
+        getContentPane().add(pnlFichas);
+        pnlFichas.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+        pnlFichas.setLayout(null);
+
+        lblCodigoCliente = new JLabel("Código del cliente");
+        lblCodigoCliente.setBounds(36, 137, 89, 14);
+        pnlFichas.add(lblCodigoCliente);
+
+        txtCodigoCliente = new JTextField();
+        txtCodigoCliente.setBounds(150, 134, 121, 20);
+        pnlFichas.add(txtCodigoCliente);
+        txtCodigoCliente.setColumns(10);
+
+        lblCodigoProducto = new JLabel("Código del producto");
+        lblCodigoProducto.setBounds(36, 190, 104, 14);
+        pnlFichas.add(lblCodigoProducto);
+
+        btnConsultar = new JButton("Buscar");
+        btnConsultar.addActionListener(this);
+        btnConsultar.setBounds(97, 286, 101, 23);
+        pnlFichas.add(btnConsultar);
+        
+        lblCodigoVendedor = new JLabel("Código del vendedor");
+        lblCodigoVendedor.setBounds(36, 165, 104, 14);
+        pnlFichas.add(lblCodigoVendedor);
+        
+        txtCodigoVendedor = new JTextField();
+        txtCodigoVendedor.setText("");
+        txtCodigoVendedor.setEnabled(true);
+        txtCodigoVendedor.setColumns(10);
+        txtCodigoVendedor.setBounds(150, 162, 121, 20);
+        pnlFichas.add(txtCodigoVendedor);
+        
+        txtCodigoProducto = new JTextField();
+        txtCodigoProducto.setText("");
+        txtCodigoProducto.setEnabled(true);
+        txtCodigoProducto.setColumns(10);
+        txtCodigoProducto.setBounds(150, 187, 121, 20);
+        pnlFichas.add(txtCodigoProducto);
+        
+        txtUnidadesVender = new JTextField();
+        txtUnidadesVender.setText("");
+        txtUnidadesVender.setEnabled(true);
+        txtUnidadesVender.setColumns(10);
+        txtUnidadesVender.setBounds(150, 215, 121, 20);
+        pnlFichas.add(txtUnidadesVender);
+        
+        lblUnidadesAVender = new JLabel("Unidades a vender");
+        lblUnidadesAVender.setBounds(36, 218, 104, 14);
+        pnlFichas.add(lblUnidadesAVender);
+        
+        lblNewLabel = new JLabel("VENTAS");
+        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 29));
+        lblNewLabel.setBounds(97, 40, 133, 66);
+        pnlFichas.add(lblNewLabel);
+        
+        panel = new JPanel();
+        panel.setBounds(336, 11, 324, 375);
+        getContentPane().add(panel);
+        panel.setLayout(null);
+        
+        txtS = new JTextArea();
+        txtS.setBounds(0, 0, 324, 375);
+        panel.add(txtS);
+        txtS.setEditable(false);
+    }
+
+    public void actionPerformed(ActionEvent arg0) {
+        if (arg0.getSource() == btnConsultar) {
+            actionPerformedBtnConsultar(arg0);
+        }
+    }
+    public int leerCodigoCliente() {
+    	return Integer.parseInt(txtCodigoCliente.getText());
+    }
+    public int leerCodigoVendedor() {
+    	return Integer.parseInt(txtCodigoVendedor.getText());
+    }
+    public int leerCodigoProducto() {
+    	return Integer.parseInt(txtCodigoProducto.getText());
+    }
+    public int LeerUnidadesAVender() {
+    	return Integer.parseInt(txtUnidadesVender.getText());
+    }
+    
+    protected void actionPerformedBtnConsultar(ActionEvent e) {
+       Vendedor x = aV.buscar(leerCodigoVendedor());
+       Cliente c = aC.buscar(leerCodigoCliente());
+       Producto p = aP.buscar(leerCodigoProducto());
+       
+       if(x !=null && c !=null && p !=null) {
+    	  
+    	   imprimir("Codigo Cliente           :  " +c.getCodigoCliente());
+    	   imprimir("Codigo Vendedor          :  " +x.getCodigoVendedor());
+    	   imprimir("Codigo Producto          :  " +p.getCodigoProducto());
+    	   imprimir("Descripcion del producto :  " +p.getDescripcion());
+    	   imprimir("Precio unitario          :  " +p.getPrecio());
+    	   imprimir("Importe subTotal         :  " +subTotal(p));
+    	   imprimir("Importe del IGV          :  " +importeIGV(p));
+    	   imprimir("Importe total a pagar    :  " +totalPagar(p));
+    	   
+       }
+       else {
+    	   JOptionPane.showMessageDialog(this, "Codigo Invalido");
+       }
+    }
+    
+    public double subTotal(Producto p) {
+ 	   return p.getPrecio()*LeerUnidadesAVender();
+    }
+    public double importeIGV(Producto p) {
+    	return 0.18*subTotal(p);
+    }
+    public double totalPagar(Producto p) {
+    	return importeIGV(p) + subTotal(p);
+    }
+    void imprimir(String s) {
+		txtS.append(s + "\n");
+	}
+}

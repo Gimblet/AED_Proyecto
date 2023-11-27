@@ -58,8 +58,5 @@ public class Cliente {
         this.dni = dni;
     }
 
-    //Metodos
-
-
 }
 

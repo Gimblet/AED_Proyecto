@@ -4,4 +4,6 @@
     <fullyQualifiedTypeName name="guis.GuiCliente"/>
     <fullyQualifiedTypeName name="guis.GuiVendores"/>
     <fullyQualifiedTypeName name="guis.GuiProductos"/>
+    <fullyQualifiedTypeName name="javax.swing.JFrame"/>
+    <fullyQualifiedTypeName name="arreglos.ArregloClientes"/>
 </qualifiedTypeNameHistroy>

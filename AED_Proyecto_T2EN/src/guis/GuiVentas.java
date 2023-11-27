@@ -75,71 +75,72 @@ public class GuiVentas extends JDialog implements ActionListener {
         getContentPane().setLayout(null);
 
         pnlFichas = new JPanel();
-        pnlFichas.setBounds(10, 36, 279, 311);
+        pnlFichas.setBounds(10, 11, 316, 375);
         getContentPane().add(pnlFichas);
         pnlFichas.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
         pnlFichas.setLayout(null);
 
         lblCodigoCliente = new JLabel("Código del cliente");
-        lblCodigoCliente.setBounds(21, 108, 89, 14);
+        lblCodigoCliente.setBounds(35, 137, 115, 14);
         pnlFichas.add(lblCodigoCliente);
 
         txtCodigoCliente = new JTextField();
-        txtCodigoCliente.setBounds(135, 105, 121, 20);
+        txtCodigoCliente.setBounds(160, 134, 121, 20);
         pnlFichas.add(txtCodigoCliente);
         txtCodigoCliente.setColumns(10);
 
         lblCodigoProducto = new JLabel("Código del producto");
-        lblCodigoProducto.setBounds(21, 161, 104, 14);
+        lblCodigoProducto.setBounds(35, 190, 115, 14);
         pnlFichas.add(lblCodigoProducto);
 
         btnConsultar = new JButton("Buscar");
         btnConsultar.addActionListener(this);
-        btnConsultar.setBounds(82, 257, 101, 23);
+        btnConsultar.setBounds(107, 286, 101, 23);
         pnlFichas.add(btnConsultar);
         
         lblCodigoVendedor = new JLabel("Código del vendedor");
-        lblCodigoVendedor.setBounds(21, 136, 104, 14);
+        lblCodigoVendedor.setBounds(35, 165, 115, 14);
         pnlFichas.add(lblCodigoVendedor);
         
         txtCodigoVendedor = new JTextField();
         txtCodigoVendedor.setText("");
         txtCodigoVendedor.setEnabled(true);
         txtCodigoVendedor.setColumns(10);
-        txtCodigoVendedor.setBounds(135, 133, 121, 20);
+        txtCodigoVendedor.setBounds(160, 162, 121, 20);
         pnlFichas.add(txtCodigoVendedor);
         
         txtCodigoProducto = new JTextField();
         txtCodigoProducto.setText("");
         txtCodigoProducto.setEnabled(true);
         txtCodigoProducto.setColumns(10);
-        txtCodigoProducto.setBounds(135, 158, 121, 20);
+        txtCodigoProducto.setBounds(160, 187, 121, 20);
         pnlFichas.add(txtCodigoProducto);
         
         txtUnidadesVender = new JTextField();
         txtUnidadesVender.setText("");
         txtUnidadesVender.setEnabled(true);
         txtUnidadesVender.setColumns(10);
-        txtUnidadesVender.setBounds(135, 186, 121, 20);
+        txtUnidadesVender.setBounds(160, 215, 121, 20);
         pnlFichas.add(txtUnidadesVender);
         
         lblUnidadesAVender = new JLabel("Unidades a vender");
-        lblUnidadesAVender.setBounds(21, 189, 104, 14);
+        lblUnidadesAVender.setBounds(35, 218, 115, 14);
         pnlFichas.add(lblUnidadesAVender);
         
         lblNewLabel = new JLabel("VENTAS");
         lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 29));
-        lblNewLabel.setBounds(82, 11, 133, 66);
+        lblNewLabel.setBounds(107, 40, 133, 66);
         pnlFichas.add(lblNewLabel);
         
         panel = new JPanel();
-        panel.setBounds(311, 39, 337, 305);
+        panel.setBounds(336, 11, 324, 375);
         getContentPane().add(panel);
         panel.setLayout(null);
         
         txtS = new JTextArea();
-        txtS.setBounds(0, 0, 337, 305);
+        txtS.setBounds(0, 0, 324, 375);
         panel.add(txtS);
+        txtS.setEditable(false);
     }
 
     public void actionPerformed(ActionEvent arg0) {
