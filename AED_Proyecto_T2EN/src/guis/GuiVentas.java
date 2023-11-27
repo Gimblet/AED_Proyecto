@@ -3,7 +3,9 @@ package guis;
 import arreglos.ArregloVendedores;
 import clases.Vendedor;
 import clases.Cliente;
+import clases.Factura;
 import arreglos.ArregloClientes;
+import arreglos.ArregloFacturas;
 import clases.Producto;
 import arreglos.ArregloProductos;
 
@@ -15,9 +17,6 @@ import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import java.awt.Font;
 
-
-
-
 public class GuiVentas extends JDialog implements ActionListener {
     private static final long serialVersionUID = 1L;
     private JLabel lblCodigoCliente;
@@ -25,9 +24,6 @@ public class GuiVentas extends JDialog implements ActionListener {
     private JLabel lblCodigoProducto;
     private JButton btnConsultar;
     private JPanel pnlFichas;
- 
-
-    
     private JLabel lblCodigoVendedor;
     private JTextField txtCodigoVendedor;
     private JTextField txtCodigoProducto;
@@ -35,11 +31,13 @@ public class GuiVentas extends JDialog implements ActionListener {
     private JLabel lblUnidadesAVender;
     private JLabel lblNewLabel;
     
+    private JPanel panel;
+    private JTextArea txtS;
+    
     ArregloClientes aC = new ArregloClientes();
     ArregloVendedores aV = new ArregloVendedores();
     ArregloProductos aP = new ArregloProductos();
-    private JPanel panel;
-    private JTextArea txtS;
+    ArregloFacturas aF = new ArregloFacturas();
     
     
     /**
@@ -73,6 +71,7 @@ public class GuiVentas extends JDialog implements ActionListener {
         setTitle("Ventas de Clientes");
         setBounds(100, 100, 686, 436);
         getContentPane().setLayout(null);
+        
 
         pnlFichas = new JPanel();
         pnlFichas.setBounds(10, 11, 316, 375);
@@ -166,32 +165,37 @@ public class GuiVentas extends JDialog implements ActionListener {
        Cliente c = aC.buscar(leerCodigoCliente());
        Producto p = aP.buscar(leerCodigoProducto());
        
-       if(x !=null && c !=null && p !=null) {
-    	  
-    	   imprimir("Codigo Cliente           :  " +c.getCodigoCliente());
-    	   imprimir("Codigo Vendedor          :  " +x.getCodigoVendedor());
-    	   imprimir("Codigo Producto          :  " +p.getCodigoProducto());
-    	   imprimir("Descripcion del producto :  " +p.getDescripcion());
-    	   imprimir("Precio unitario          :  " +p.getPrecio());
-    	   imprimir("Importe subTotal         :  " +subTotal(p));
-    	   imprimir("Importe del IGV          :  " +importeIGV(p));
-    	   imprimir("Importe total a pagar    :  " +totalPagar(p));
+       if(x != null && c != null && p != null) {
+    	   generarFactura(p);
+    	   imprimir("Codigo Cliente           :  " + c.getCodigoCliente());
+    	   imprimir("Codigo Vendedor          :  " + x.getCodigoVendedor());
+    	   imprimir("Codigo Producto          :  " + p.getCodigoProducto());
+    	   imprimir("Descripcion del producto :  " + p.getDescripcion());
+    	   imprimir("Precio unitario          :  " + p.getPrecio());
+    	   imprimir("Importe subTotal         :  " + subTotal(p));
+    	   imprimir("Importe del IGV          :  " + importeIGV(p));
+    	   imprimir("Importe total a pagar    :  " + totalPagar(p));
     	   
        }
-       else {
-    	   JOptionPane.showMessageDialog(this, "Codigo Invalido");
-       }
+       else { JOptionPane.showMessageDialog(this, "Codigo Invalido"); }
+    }
+    
+    public void generarFactura(Producto p) {
+    	aF.adicionar(new Factura(aF.generarCodigo(), leerCodigoProducto(), leerCodigoVendedor(), LeerUnidadesAVender(), p.getPrecio()));
     }
     
     public double subTotal(Producto p) {
  	   return p.getPrecio()*LeerUnidadesAVender();
     }
+    
     public double importeIGV(Producto p) {
     	return 0.18*subTotal(p);
     }
+    
     public double totalPagar(Producto p) {
     	return importeIGV(p) + subTotal(p);
     }
+    
     void imprimir(String s) {
 		txtS.append(s + "\n");
 	}

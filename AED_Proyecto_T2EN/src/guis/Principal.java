@@ -30,7 +30,11 @@ public class Principal extends JFrame implements ActionListener {
 	private JMenu mnIngreso;
 	private JMenuItem mntmRealizarNuevaVenta;
 	private JMenu mnReportes;
-	private JMenuItem mntmObtenerReportes;
+	private JMenuItem mntmReporteGeneralProductos;
+	private JMenuItem mntmReporteGeneralVendedores;
+	private JMenuItem mntmReporteXVendedor;
+	private JMenuItem mntmReporteXProducto;
+	private JMenuItem mntmReporteXPrecio;
 
 	/**
 	 * Launch the application.
@@ -128,8 +132,45 @@ public class Principal extends JFrame implements ActionListener {
 		mnReportes = new JMenu("Reportes");
 		menuBar.add(mnReportes);
 		
-		mntmObtenerReportes = new JMenuItem("Obtener Reportes");
-		mnReportes.add(mntmObtenerReportes);
+		mntmReporteGeneralProductos = new JMenuItem("Reporte General de Productos");
+		mntmReporteGeneralProductos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mntmReporteGeneralProductosActionPerformed(e);
+			}
+		});
+		mnReportes.add(mntmReporteGeneralProductos);
+		
+		mntmReporteGeneralVendedores = new JMenuItem("Reporte General de Vendedores");
+		mntmReporteGeneralVendedores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mntmReporteGeneralVendedoresActionPerformed(e);
+			}
+		});
+		mnReportes.add(mntmReporteGeneralVendedores);
+		
+		mntmReporteXVendedor = new JMenuItem("Reporte por Vendedor");
+		mntmReporteXVendedor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mntmReporteXVendedorActionPerformed(e);
+			}
+		});
+		mnReportes.add(mntmReporteXVendedor);
+		
+		mntmReporteXProducto = new JMenuItem("Reporte por Producto");
+		mntmReporteXProducto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mntmReporteXProductoActionPerformed(e);
+			}
+		});
+		mnReportes.add(mntmReporteXProducto);
+		
+		mntmReporteXPrecio = new JMenuItem("Reporte por Precio");
+		mntmReporteXPrecio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mntmReporteXPrecioActionPerformed(e);
+			}
+		});
+		mnReportes.add(mntmReporteXPrecio);
 	}
 
 	//Se encarga de llamar a las Pantallas
@@ -151,6 +192,21 @@ public class Principal extends JFrame implements ActionListener {
 		else if(e.getSource() == mntmRealizarNuevaVenta){
 			mntmRealizarNuevaVentaActionPerformed(e);
 		}
+		else if(e.getSource() == mntmReporteGeneralProductos){
+			mntmReporteGeneralProductosActionPerformed(e);;
+		}
+		else if(e.getSource() == mntmReporteGeneralVendedores){
+			mntmReporteGeneralVendedoresActionPerformed(e);
+		}
+		else if(e.getSource() == mntmReporteXVendedor){
+			mntmReporteXVendedorActionPerformed(e);
+		}
+		else if(e.getSource() == mntmReporteXProducto){
+			mntmReporteXProductoActionPerformed(e);
+		}
+		else {
+			mntmReporteXPrecioActionPerformed(e);
+		}
 	}
 
 	protected void mntmClientesActionPerformed(ActionEvent e) {
@@ -164,14 +220,45 @@ public class Principal extends JFrame implements ActionListener {
 		guiVen.setLocationRelativeTo(frmMenuPrincipal);
 		guiVen.setVisible(true);
 	}
+	
 	protected void mntmProductosActionPerformed(ActionEvent e) {
 		GuiProductos guiPro = new GuiProductos();
 		guiPro.setLocationRelativeTo(frmMenuPrincipal);
 		guiPro.setVisible(true);
 	}
+	
 	protected void mntmRealizarNuevaVentaActionPerformed(ActionEvent e) {
 		GuiVentas guiVent = new GuiVentas();
 		guiVent.setLocationRelativeTo(frmMenuPrincipal);
 		guiVent.setVisible(true);
+	}
+	
+	protected void mntmReporteGeneralProductosActionPerformed(ActionEvent e) {
+		ReporteGeneralProductos reporteProductos = new ReporteGeneralProductos();
+		reporteProductos.setLocationRelativeTo(frmMenuPrincipal);
+		reporteProductos.setVisible(true);
+	}
+	
+	protected void mntmReporteGeneralVendedoresActionPerformed(ActionEvent e) {
+		ReporteGeneralVendedores reporteVendedores = new ReporteGeneralVendedores();
+		reporteVendedores.setLocationRelativeTo(frmMenuPrincipal);
+		reporteVendedores.setVisible(true);
+	}
+	protected void mntmReporteXVendedorActionPerformed(ActionEvent e) {
+		GuiReporteXVendedor reporteXVendedor = new GuiReporteXVendedor();
+		reporteXVendedor.setLocationRelativeTo(frmMenuPrincipal);
+		reporteXVendedor.setVisible(true);
+	}
+	
+	protected void mntmReporteXProductoActionPerformed(ActionEvent e) {
+		GuiReporteXProducto reporteXProducto = new GuiReporteXProducto();
+		reporteXProducto.setLocationRelativeTo(frmMenuPrincipal);
+		reporteXProducto.setVisible(true);
+	}
+	
+	protected void mntmReporteXPrecioActionPerformed(ActionEvent e) {
+		ReportePrecios reportePrecios = new ReportePrecios();
+		reportePrecios.setLocationRelativeTo(frmMenuPrincipal);
+		reportePrecios.setVisible(true);
 	}
 }

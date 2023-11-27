@@ -40,6 +40,7 @@ public class GuiVendores extends JDialog implements ActionListener {
     private JTextField txtCategoria;
 
     ArregloVendedores aV = new ArregloVendedores();
+    	
     /**
      * Launch the application.
      */

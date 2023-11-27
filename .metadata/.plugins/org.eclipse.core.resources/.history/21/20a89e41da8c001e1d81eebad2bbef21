@@ -1,0 +1,206 @@
+package guis;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import java.awt.GridLayout;
+import javax.swing.JScrollPane;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.UIManager;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class Principal extends JFrame implements ActionListener {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JFrame frmMenuPrincipal;
+	private JScrollPane scrollPane;
+	private JMenuBar menuBar;
+	private JMenu mnArchivo;
+	private JMenuItem mntmSalir;
+	private JMenu mnMantenimiento;
+	private JMenuItem mntmVendedores;
+	private JMenuItem mntmClientes;
+	private JMenuItem mntmProductos;
+	private JMenu mnIngreso;
+	private JMenuItem mntmRealizarNuevaVenta;
+	private JMenu mnReportes;
+	private JMenuItem mntmReporteGeneralProductos;
+	private JMenuItem mntmReporteGeneralVendedores;
+	private JMenuItem mntmReporteXVendedor;
+	private JMenuItem mntmReporteXProducto;
+	private JMenuItem mntmReporteXPrecio;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Principal window = new Principal();
+					window.frmMenuPrincipal.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public Principal() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmMenuPrincipal = new JFrame();
+		frmMenuPrincipal.setTitle("Menu Principal");
+		frmMenuPrincipal.setBounds(100, 100, 900, 650);
+		frmMenuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmMenuPrincipal.getContentPane().setLayout(new GridLayout(1, 0, 0, 0));
+		
+		scrollPane = new JScrollPane();
+		frmMenuPrincipal.getContentPane().add(scrollPane);
+		
+		menuBar = new JMenuBar();
+		scrollPane.setColumnHeaderView(menuBar);
+		
+		mnArchivo = new JMenu("Archivo");
+		menuBar.add(mnArchivo);
+		
+		mntmSalir = new JMenuItem("Salir");
+		mntmSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mntmSalirActionPerformed(e);
+			}
+		});
+		mnArchivo.add(mntmSalir);
+		
+		mnMantenimiento = new JMenu("Mantenimiento");
+		menuBar.add(mnMantenimiento);
+		
+		mntmVendedores = new JMenuItem("Vendedores");
+		mntmVendedores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mntmVendedoresActionPerformed(e);
+			}
+		});
+		
+		mntmClientes = new JMenuItem("Clientes");
+		mntmClientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mntmClientesActionPerformed(e);
+			}
+		});
+		mnMantenimiento.add(mntmClientes);
+		mnMantenimiento.add(mntmVendedores);
+		
+		mntmProductos = new JMenuItem("Productos");
+		mntmProductos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mntmProductosActionPerformed(e);
+			}
+		});
+		mnMantenimiento.add(mntmProductos);
+		
+		mnIngreso = new JMenu("Ventas");
+		menuBar.add(mnIngreso);
+		
+		mntmRealizarNuevaVenta = new JMenuItem("Realizar Nueva Venta");
+		mntmRealizarNuevaVenta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mntmRealizarNuevaVentaActionPerformed(e);
+			}
+		});
+		mnIngreso.add(mntmRealizarNuevaVenta);
+		
+		mnReportes = new JMenu("Reportes");
+		menuBar.add(mnReportes);
+		
+		mntmReporteGeneralProductos = new JMenuItem("Reporte General de Productos");
+		mntmReporteGeneralProductos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mntmReporteGeneralProductosActionPerformed(e);
+			}
+		});
+		mnReportes.add(mntmReporteGeneralProductos);
+		
+		mntmReporteGeneralVendedores = new JMenuItem("Reporte General de Vendedores");
+		mnReportes.add(mntmReporteGeneralVendedores);
+		
+		mntmReporteXVendedor = new JMenuItem("Reporte por Vendedor");
+		mnReportes.add(mntmReporteXVendedor);
+		
+		mntmReporteXProducto = new JMenuItem("Reporte por Producto");
+		mnReportes.add(mntmReporteXProducto);
+		
+		mntmReporteXPrecio = new JMenuItem("Reporte por Precio");
+		mnReportes.add(mntmReporteXPrecio);
+	}
+
+	//Se encarga de llamar a las Pantallas
+
+	protected static void mntmSalirActionPerformed(ActionEvent e) {
+		System.out.println(0);
+	}
+
+	public void actionPerformed(ActionEvent e){
+		if(e.getSource() == mntmClientes){
+			mntmClientesActionPerformed(e);
+		}
+		else if(e.getSource() == mntmVendedores){
+			mntmVendedoresActionPerformed(e);
+		}
+		else if(e.getSource() == mntmProductos){
+			mntmProductosActionPerformed(e);
+		}
+		else if(e.getSource() == mntmRealizarNuevaVenta){
+			mntmRealizarNuevaVentaActionPerformed(e);
+		}
+		else if(e.getSource() == mntmRealizarNuevaVenta){
+			mntmRealizarNuevaVentaActionPerformed(e);
+		}
+	}
+
+	protected void mntmClientesActionPerformed(ActionEvent e) {
+		GuiCliente guiCli = new GuiCliente();
+		guiCli.setLocationRelativeTo(frmMenuPrincipal);
+		guiCli.setVisible(true);
+	}
+	
+	protected void mntmVendedoresActionPerformed(ActionEvent e) {
+		GuiVendores guiVen = new GuiVendores();
+		guiVen.setLocationRelativeTo(frmMenuPrincipal);
+		guiVen.setVisible(true);
+	}
+	protected void mntmProductosActionPerformed(ActionEvent e) {
+		GuiProductos guiPro = new GuiProductos();
+		guiPro.setLocationRelativeTo(frmMenuPrincipal);
+		guiPro.setVisible(true);
+	}
+	protected void mntmRealizarNuevaVentaActionPerformed(ActionEvent e) {
+		GuiVentas guiVent = new GuiVentas();
+		guiVent.setLocationRelativeTo(frmMenuPrincipal);
+		guiVent.setVisible(true);
+	}
+	protected void mntmReporteGeneralProductosActionPerformed(ActionEvent e) {
+		ReporteGeneralProductos reporteProductos = new ReporteGeneralProductos();
+		reporteProductos.setLocationRelativeTo(frmMenuPrincipal);
+		reporteProductos.setVisible(true);
+	}
+}

@@ -1,0 +1,77 @@
+package guis;
+
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextArea;
+import javax.swing.JButton;
+import javax.swing.UIManager;
+
+public class ReporteGeneralVendedores extends JFrame {
+
+	/**
+	 * 
+	 */
+	
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JPanel panel;
+	private JTextArea txtS;
+	private JButton btnCerrar;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ReporteGeneralVendedores frame = new ReporteGeneralVendedores();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public ReporteGeneralVendedores() {
+		setTitle("Reporte General por Vendedores");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 638, 478);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		panel = new JPanel();
+		panel.setBounds(10, 11, 602, 383);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		txtS = new JTextArea();
+		txtS.setEditable(false);
+		txtS.setBounds(0, 0, 602, 381);
+		panel.add(txtS);
+		
+		btnCerrar = new JButton("Cerrar");
+		btnCerrar.setBounds(274, 405, 89, 23);
+		contentPane.add(btnCerrar);
+	}
+	
+	protected void btnCerrarActionPerformed(ActionEvent e) {
+		dispose();
+	}
+}

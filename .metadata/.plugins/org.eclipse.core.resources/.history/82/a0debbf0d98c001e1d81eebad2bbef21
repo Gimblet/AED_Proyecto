@@ -1,0 +1,20 @@
+package clases;
+import arreglos.ArregloClientes;
+
+public class DataManager {
+	private static final DataManager instance = new DataManager();
+    private ArregloClientes arregloClientes;
+
+    private DataManager() {
+        arregloClientes = new ArregloClientes();
+        // You can initialize other data here if needed
+    }
+
+    public static DataManager getInstance() {
+        return instance;
+    }
+
+    public ArregloClientes getArregloClientes() {
+        return arregloClientes;
+    }
+}
